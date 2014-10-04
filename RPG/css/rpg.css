@@ -1,0 +1,12 @@
+body {
+}
+
+#fieldMap {
+  border: 1px solid #000000;
+  float: left;
+}
+
+#battleView {
+  border: 1px solid #000000;
+  float: right;
+}
