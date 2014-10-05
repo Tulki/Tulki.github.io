@@ -1,7 +1,7 @@
 var ball = {
-  x: 45,
-  y: 70,
-  dx: 1,
+  x: 150,
+  y: 100,
+  dx: -1,
   dy: 1,
   
   r: 10,
@@ -20,7 +20,7 @@ var ball = {
 	  this.dy = -1*this.dy;
     }
 	else if (this.y + this.dy > max_y) {
-	  if (this.x > paddle.x && this.x < paddle.x + paddle.w) {
+	  if (this.x + this.r > paddle.x && this.x - this.r < paddle.x + paddle.w) {
 	    this.dy = -1*this.dy;
       }
 	  // Game over if the ball misses the paddle.
