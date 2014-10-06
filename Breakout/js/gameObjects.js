@@ -64,4 +64,17 @@ var paddle = {
   }
 };
 
-var bricks = {};
+var bricks = {
+  rows: 5,
+  cols: 5,
+  total_width: 0,
+  total_height: 0,
+  brick_width: 0,
+  brick_height: 0,
+  
+  init_bricks: function() {
+    this.total_width = mainScreen.width;
+	this.total_height = mainScreen.height / 3;
+	// more stuff to do
+  }
+};

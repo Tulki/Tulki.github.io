@@ -13,9 +13,9 @@ var mainScreen = {
 };
 
 function init() {
-  mainScreen.canvas = $('#canvas')[0].getContext("2d");
-  mainScreen.width = $("#canvas").width();
-  mainScreen.height = $("#canvas").height();
+  mainScreen.canvas = $('#mainScreen')[0].getContext("2d");
+  mainScreen.width = $("#mainScreen").width();
+  mainScreen.height = $("#mainScreen").height();
   return setInterval(draw, 10);
 }
 
