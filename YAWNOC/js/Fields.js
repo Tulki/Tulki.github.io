@@ -18,21 +18,44 @@ class BaseField {
         }
     }
 
+    getWidth() {
+        return this.#width;
+    }
+
+    getHeight() {
+        return this.#height;
+    }
+
     // x is left to right
     // y is top to bottom
     getCell(x, y) {
-        throw new Error("Method getCell(x, y) must be implemented.");
+        if (this.#outOfBounds(x, y)) {
+            return this.resolveOutOfBoundsCell(x, y);
+        }
+        else {
+            let index = this.#resolveCellIndex(x, y);
+            return this.#cells[index];
+        }
     }
 
-    outOfBounds(x, y) {
-        return (x < 0 || x >= this.#width || y < 0 || y >= this.#width);
+    setCell(x, y, cell) {
+        let index = this.#resolveCellIndex(x, y);
+        this.#cells[index] = cell;
+    }
+
+    #resolveCellIndex(x, y) {
+        return y*this.#width + x;
+    }
+
+    #outOfBounds(x, y) {
+        return (x < 0 || x >= this.#width || y < 0 || y >= this.#height);
+    }
+
+    resolveOutOfBoundsCell(x, y) {
+        throw new Error("Method #resolveOutOfBoundsCell(x, y) must be implemented.");
     }
 
     drawText() {
-        if (this.constructor == BaseField) {
-            throw new Error("Cannot call method drawText() in BaseField. Must be inherited.");
-        }
-
         let text = "";
         for (let y = 0; y < this.#height; y++) {
             for (let x = 0; x < this.#width; x++) {
@@ -45,22 +68,11 @@ class BaseField {
 }
 
 class TruncatingField extends BaseField {
-    #width;
-    #height;
-
-    #cells;
-
     constructor(width, height) {
         super(width, height);
     }
 
-    getCell(x, y) {
-        if (this.outOfBounds(x, y)) {
-            return new DeadCell();
-        }
-        else {
-            let index = y*width + x;
-            return this.#cells[index];
-        }
+    resolveOutOfBoundsCell(x, y) {
+        return new DeadCell();
     }
 }
