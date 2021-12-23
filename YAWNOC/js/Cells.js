@@ -29,8 +29,19 @@ class DeadCell extends BaseCell {
 }
 
 class LiveCell extends BaseCell {
+    #lifespan;
+
     constructor() {
         super();
+        this.lifespan = 0;
+    }
+
+    getLifespan() {
+        return this.#lifespan;
+    }
+
+    setLifespan(lifespan) {
+        this.#lifespan = lifespan;
     }
 
     contribute() {
